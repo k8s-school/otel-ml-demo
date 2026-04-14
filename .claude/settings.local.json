@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m src.otel_ml_demo.pipeline --log-level INFO --n-estimators 10)",
+      "Bash(python3 -m src.otel_ml_demo.inference --model-info)",
+      "Bash(python3 -m src.otel_ml_demo.inference --example)",
+      "Bash(python3 -m src.otel_ml_demo.inference --input '{\"\"objid\"\": 1237648720693755918, \"\"u\"\": 23.87882, \"\"g\"\": 22.2753, \"\"r\"\": 20.39501, \"\"i\"\": 19.16573, \"\"z\"\": 18.79371, \"\"alpha\"\": 135.689, \"\"delta\"\": 32.494, \"\"redshift\"\": 0.634794}')",
+      "Bash(python3 -m src.otel_ml_demo.inference --input '{\"\"objid\"\": 1237648668670849481, \"\"u\"\": 19.43718, \"\"g\"\": 17.58028, \"\"r\"\": 16.49747, \"\"i\"\": 15.97711, \"\"z\"\": 15.54461, \"\"alpha\"\": 345.282, \"\"delta\"\": 21.183, \"\"redshift\"\": 0.000010}')",
+      "Bash(tree src/ data/ models/ -I '__pycache__')",
+      "Bash(pip install pytest pytest-cov pytest-mock)",
+      "Bash(python -m pytest tests/ -v --tb=short)",
+      "Bash(python -m pytest tests/test_data_loader.py -v --tb=short)",
+      "Bash(tree -I \"venv|__pycache__\" --dirsfirst)",
+      "Bash(python -m src.otel_ml_demo.pipeline --log-level INFO --n-estimators 10)",
+      "Bash(python -m src.otel_ml_demo.inference --input '{\"\"objid\"\": 1237648720693755918, \"\"u\"\": 23.87882, \"\"g\"\": 22.2753, \"\"r\"\": 20.39501, \"\"i\"\": 19.16573, \"\"z\"\": 18.79371, \"\"alpha\"\": 135.689, \"\"delta\"\": 32.494, \"\"redshift\"\": 0.634794}')",
+      "Bash(git add .)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
