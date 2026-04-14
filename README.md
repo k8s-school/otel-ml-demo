@@ -56,37 +56,66 @@ pip install -e .
 #### 1. Train a Model
 
 ```bash
-# Train with default parameters
-python -m src.otel_ml_demo.pipeline
+# Using convenience script (recommended)
+./train.sh
 
-# Train with custom parameters
+# Quick training with fewer estimators
+./train.sh --quick
+
+# Custom parameters
+./train.sh --n-estimators 200 --test-size 0.3 --verbose
+
+# Direct Python module usage
 python -m src.otel_ml_demo.pipeline --n-estimators 100 --test-size 0.3 --log-level INFO
 ```
 
 #### 2. Make Predictions
 
 ```bash
-# Single observation prediction
-python -m src.otel_ml_demo.inference --input '{
-  "objid": 1237648720693755918,
-  "u": 23.87882,
-  "g": 22.2753,
-  "r": 20.39501,
-  "i": 19.16573,
-  "z": 18.79371,
-  "alpha": 135.689,
-  "delta": 32.494,
-  "redshift": 0.634794
-}'
+# Interactive inference menu (recommended)
+./infer.sh
+
+# Quick examples
+./infer.sh examples           # Run all example predictions
+./infer.sh galaxy             # Predict galaxy example
+./infer.sh star               # Predict star example
+./infer.sh qso                # Predict quasar example
 
 # Show model information
-python -m src.otel_ml_demo.inference --model-info
+./infer.sh info
 
-# Show example usage
-python -m src.otel_ml_demo.inference --example
+# Custom JSON prediction
+./infer.sh '{"objid": 123, "u": 23.9, "g": 22.3, "r": 20.4, "i": 19.2, "z": 18.8, "alpha": 135.7, "delta": 32.5, "redshift": 0.63}'
+
+# Predict from file
+./infer.sh file my_data.json
+
+# Direct Python module usage
+python -m src.otel_ml_demo.inference --input '{"objid": 1237648720693755918, "u": 23.87882, "g": 22.2753, "r": 20.39501, "i": 19.16573, "z": 18.79371, "alpha": 135.689, "delta": 32.494, "redshift": 0.634794}'
 ```
 
-#### 3. Example Output
+#### 3. Run Tests
+
+```bash
+# Run all tests with coverage
+./test.sh --coverage
+
+# Run specific test categories
+./test.sh unit                # Unit tests only
+./test.sh integration         # Integration tests only
+./test.sh data                # Data loader tests only
+
+# Quick test run
+./test.sh fast
+
+# Verbose output with HTML coverage report
+./test.sh --verbose --coverage --coverage-format html
+
+# Direct pytest usage
+pytest tests/ -v --cov=src --cov-report=html
+```
+
+#### 4. Example Output
 
 ```json
 {
@@ -134,9 +163,71 @@ otel-ml-demo/
 │   ├── stellar_classifier.joblib
 │   └── data_preprocessing.joblib
 ├── logs/                      # Log files
+├── train.sh                   # Training convenience script
+├── infer.sh                   # Inference convenience script
+├── test.sh                    # Testing convenience script
 ├── pyproject.toml            # Project configuration
 └── README.md                 # This file
 ```
+
+## 🚀 Convenience Scripts
+
+The project includes three powerful convenience scripts for common operations:
+
+### `train.sh` - Model Training
+
+```bash
+./train.sh [OPTIONS]
+
+# Examples
+./train.sh                      # Default training
+./train.sh --quick               # Fast training (10 estimators)
+./train.sh -n 200 -t 0.3         # 200 estimators, 30% test split
+./train.sh --verbose -f train.log # Verbose with log file
+```
+
+**Key Features:**
+- ✅ Colored output with progress indicators
+- ✅ Parameter validation and error handling
+- ✅ Automatic model info display after training
+- ✅ Duration tracking and performance metrics
+
+### `infer.sh` - Model Inference
+
+```bash
+./infer.sh [MODE] [OPTIONS]
+
+# Examples
+./infer.sh                      # Interactive menu
+./infer.sh info                 # Model information
+./infer.sh examples             # Run all examples
+./infer.sh galaxy               # Galaxy prediction
+./infer.sh '{"objid": 123, ...}' # Custom JSON
+```
+
+**Key Features:**
+- ✅ Interactive menu with 9 options
+- ✅ Pre-loaded example observations (galaxy, star, quasar)
+- ✅ Support for JSON input and file input
+- ✅ Colored output with prediction highlighting
+
+### `test.sh` - Test Suite
+
+```bash
+./test.sh [TEST_TYPE] [OPTIONS]
+
+# Examples
+./test.sh                       # All tests
+./test.sh unit --verbose        # Unit tests with verbose output
+./test.sh --coverage --coverage-format html # HTML coverage report
+./test.sh integration -x        # Integration tests, stop on failure
+```
+
+**Key Features:**
+- ✅ Multiple test categories (unit, integration, regression)
+- ✅ Coverage reporting (term, HTML, XML)
+- ✅ Parallel execution support
+- ✅ Detailed test summaries with timing
 
 ## 🔧 API Reference
 

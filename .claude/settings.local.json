@@ -13,7 +13,12 @@
       "Bash(tree -I \"venv|__pycache__\" --dirsfirst)",
       "Bash(python -m src.otel_ml_demo.pipeline --log-level INFO --n-estimators 10)",
       "Bash(python -m src.otel_ml_demo.inference --input '{\"\"objid\"\": 1237648720693755918, \"\"u\"\": 23.87882, \"\"g\"\": 22.2753, \"\"r\"\": 20.39501, \"\"i\"\": 19.16573, \"\"z\"\": 18.79371, \"\"alpha\"\": 135.689, \"\"delta\"\": 32.494, \"\"redshift\"\": 0.634794}')",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nImplement complete SDSS stellar classification ML pipeline\n\n- Add data loading and preprocessing for SDSS dataset\n- Implement Random Forest classifier with model persistence\n- Create training pipeline with evaluation metrics\n- Add inference system with single/batch prediction support\n- Include comprehensive test suite (unit, integration, regression)\n- Write detailed README with usage examples and API reference\n- Configure pyproject.toml with proper dependencies\n- Ready for OpenTelemetry instrumentation\n\nFeatures:\n- 3-class classification (GALAXY/STAR/QSO)\n- 8 photometric features with automatic preprocessing\n- Command-line interfaces for training and inference\n- Model serialization with joblib\n- JSON-based prediction API\n- 48 test cases covering all functionality\n- Sample dataset with 16 observations\n\nPerformance:\n- Training accuracy: 100% on sample data\n- Key features: z-band (31%), u-band (16%), r-band (15%)\n- Reproducible results with random seed control\n\nEOF\n)\")",
+      "Bash(git push origin main)",
+      "Bash(chmod +x train.sh infer.sh test.sh)",
+      "Bash(./train.sh --help)",
+      "Bash(./infer.sh --help)"
     ],
     "deny": [],
     "ask": []
